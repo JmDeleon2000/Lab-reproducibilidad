@@ -1,4 +1,4 @@
-FROM python:3.12.0a3-bullseye
+FROM python:3.10-slim-buster
 
 RUN python -m pip install pip
 RUN python -m pip install matplotlib
