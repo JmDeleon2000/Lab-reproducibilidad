@@ -1,5 +1,7 @@
 from matplotlib import pyplot as plt
 import numpy as np
+import pandas as pd
+from PIL import Image
 
 t = np.linspace(0, np.pi*50, 10000)
 
@@ -11,4 +13,13 @@ y = -3*np.sin(sqrt3*t)/sqrt3
 
 plt.figure(figsize=(20, 20))
 plt.plot(x, y)
-plt.savefig('out/test.png')
+
+outPath = 'out/test.png'
+plt.savefig(outPath)
+
+img = Image.open(outPath)
+data = img.getdata()
+df = pd.DataFrame()
+df['BlueCount'] = [sum(1 for _ in i if i[2] > 100) for i in data]
+
+df.to_csv('out/imgdata.csv')
